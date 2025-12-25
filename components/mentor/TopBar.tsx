@@ -1,20 +1,29 @@
-import { Facebook, Linkedin, Instagram, Mail, ArrowRight } from 'lucide-react';
+'use client';
+
+import { Facebook, Linkedin, Instagram, Mail, ArrowRight, Moon, Sun } from 'lucide-react';
 import { contactContent, socialLinks } from '@/data/config/landingPageData';
+import { useThemeSwitch } from '@/components/shared/useThemeSwitch';
+import { useEffect, useState } from 'react';
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   switch (platform) {
     case 'facebook':
-      return <Facebook className="w-4 h-4" />;
+      return <Facebook className="w-4 h-4" strokeWidth={1.5} />;
     case 'linkedin':
-      return <Linkedin className="w-4 h-4" />;
+      return <Linkedin className="w-4 h-4" strokeWidth={1.5} />;
     case 'instagram':
-      return <Instagram className="w-4 h-4" />;
+      return <Instagram className="w-4 h-4" strokeWidth={1.5} />;
     default:
       return null;
   }
 };
 
 export const TopBar = () => {
+  const [mounted, setMounted] = useState(false);
+  const { currentTheme, updateTheme } = useThemeSwitch();
+
+  useEffect(() => setMounted(true), []);
+
   return (
     <div className="w-full bg-secondary-800 dark:bg-secondary-900 text-primary-50 py-2.5 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm gap-2 sm:gap-4">
@@ -23,7 +32,7 @@ export const TopBar = () => {
           href={`mailto:${contactContent.email}`}
           className="flex items-center gap-1.5 sm:gap-2 hover:opacity-80 transition-opacity flex-shrink-0"
         >
-          <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+          <Mail className="w-4 h-4 flex-shrink-0" strokeWidth={1.5} />
           <span className="hidden sm:inline truncate">{contactContent.email}</span>
         </a>
 
@@ -39,7 +48,7 @@ export const TopBar = () => {
           </span>
         </a>
 
-        {/* Right: Social Links */}
+        {/* Right: Social Links + Theme Toggle */}
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           {socialLinks.map((social) => (
             <a
@@ -53,6 +62,21 @@ export const TopBar = () => {
               <SocialIcon platform={social.platform} />
             </a>
           ))}
+
+          {/* Theme Toggle - Elegant & Small */}
+          {mounted && (
+            <button
+              onClick={updateTheme}
+              className="hover:opacity-80 transition-opacity ml-1"
+              aria-label="Toggle theme"
+            >
+              {currentTheme === 'dark' ? (
+                <Moon className="w-4 h-4" strokeWidth={1.5} />
+              ) : (
+                <Sun className="w-4 h-4" strokeWidth={1.5} />
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>

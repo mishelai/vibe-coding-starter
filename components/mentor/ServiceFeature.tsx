@@ -27,14 +27,14 @@ export const ServiceFeature = ({
           imagePosition === 'right' && 'md:[&>div:first-child]:order-2'
         )}
       >
-        {/* Image - bigger on mobile */}
-        <div className="w-full max-w-[280px] sm:max-w-[360px] md:max-w-none mx-auto md:mx-0">
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+        {/* Image - wider for better visual impact */}
+        <div className="w-full max-w-[340px] sm:max-w-[440px] md:max-w-none mx-auto md:mx-0">
+          <div className="relative aspect-[3/2] rounded-xl overflow-hidden">
             <Image
               src={imageSrc}
               alt={title}
               fill
-              sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 50vw"
+              sizes="(max-width: 640px) 340px, (max-width: 768px) 440px, 50vw"
               className="object-cover"
             />
           </div>

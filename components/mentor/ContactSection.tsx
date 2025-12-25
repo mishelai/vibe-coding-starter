@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Facebook, Linkedin, Instagram, Mail, Phone } from 'lucide-react';
 import { contactContent, socialLinks } from '@/data/config/landingPageData';
 import { MentorButton } from './MentorButton';
@@ -18,6 +19,8 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 };
 
 export const ContactSection = () => {
+  const [emailConsent, setEmailConsent] = useState(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Form submission logic would go here
@@ -90,6 +93,29 @@ export const ContactSection = () => {
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-neutral-200 dark:border-secondary-700 bg-white dark:bg-secondary-900 text-secondary-800 dark:text-neutral-50 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-neutral-50 transition-all resize-none text-sm sm:text-base"
                   placeholder="Tell me about your project..."
                 />
+              </div>
+
+              {/* Email Consent Checkbox */}
+              <div className="flex items-start gap-3 pt-2">
+                <input
+                  type="checkbox"
+                  id="emailConsent"
+                  name="emailConsent"
+                  checked={emailConsent}
+                  onChange={(e) => setEmailConsent(e.target.checked)}
+                  className="mt-1 w-4 h-4 rounded border border-neutral-500 dark:border-neutral-400 bg-white dark:bg-secondary-800 hover:border-neutral-600 dark:hover:border-neutral-300 checked:bg-secondary-800 dark:checked:bg-neutral-100 checked:border-secondary-800 dark:checked:border-neutral-100 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-neutral-50 focus:ring-offset-2 dark:focus:ring-offset-secondary-900 cursor-pointer transition-colors accent-secondary-800 dark:accent-secondary-800"
+                />
+                <label
+                  htmlFor="emailConsent"
+                  className="flex-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed cursor-pointer"
+                >
+                  <span className="font-medium text-secondary-800 dark:text-neutral-50">
+                    Receive actionable insights
+                  </span>
+                  <span className="block mt-0.5 text-neutral-500 dark:text-neutral-400">
+                    Strategic guidance and resources for founders. Your email stays private.
+                  </span>
+                </label>
               </div>
 
               <MentorButton className="w-full">Send Message</MentorButton>

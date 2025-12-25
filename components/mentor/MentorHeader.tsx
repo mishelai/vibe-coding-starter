@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { ThemeSwitch } from '@/components/shared/ThemeSwitch';
 import { siteInfo, heroContent } from '@/data/config/landingPageData';
 import { MentorButton } from './MentorButton';
 import { TopBar } from './TopBar';
@@ -19,13 +18,10 @@ export const MentorHeader = () => {
           {siteInfo.name}
         </Link>
 
-        {/* Right side: Theme toggle + CTA */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <ThemeSwitch />
-          <MentorButton href="#contact" className="hidden sm:inline-flex">
-            {heroContent.primaryAction}
-          </MentorButton>
-        </div>
+        {/* Right side: CTA */}
+        <MentorButton href="#contact" className="hidden sm:inline-flex">
+          {heroContent.primaryAction}
+        </MentorButton>
       </header>
     </>
   );
