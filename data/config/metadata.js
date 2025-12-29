@@ -23,6 +23,20 @@ const metadata = {
   language: 'en-us',
   theme: 'light',
   locale: 'en-US',
+  languages: {
+    en: {
+      code: 'en',
+      name: 'English',
+      locale: 'en-US',
+      direction: 'ltr',
+    },
+    he: {
+      code: 'he',
+      name: 'עברית',
+      locale: 'he-IL',
+      direction: 'rtl',
+    },
+  },
 };
 
 module.exports = { metadata };

@@ -1,8 +1,16 @@
+'use client';
+
 import { LandingHeader, LandingHeaderMenuItem } from '@/components/landing';
 import ThemeSwitch from '@/components/shared/ThemeSwitch';
+import LanguageToggle from '@/components/shared/LanguageToggle';
 import Image from 'next/image';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
+import { translations } from '@/data/translations';
 
 export const Header = ({ className }: { className?: string }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <LandingHeader
       className={className}
@@ -23,17 +31,22 @@ export const Header = ({ className }: { className?: string }) => {
       }
     >
       <LandingHeaderMenuItem href="/features">
-        {'Features'}
+        {t.header.features}
       </LandingHeaderMenuItem>
-      <LandingHeaderMenuItem href="/pricing">{'Pricing'}</LandingHeaderMenuItem>
+      <LandingHeaderMenuItem href="/pricing">
+        {t.header.pricing}
+      </LandingHeaderMenuItem>
       <LandingHeaderMenuItem href="/security">
-        {'Security'}
+        {t.header.security}
       </LandingHeaderMenuItem>
-      <LandingHeaderMenuItem href="/help">{'Help'}</LandingHeaderMenuItem>
+      <LandingHeaderMenuItem href="/help">
+        {t.header.help}
+      </LandingHeaderMenuItem>
       <LandingHeaderMenuItem type="button" href="/dashboard">
-        Dashboard
+        {t.header.dashboard}
       </LandingHeaderMenuItem>
 
+      <LanguageToggle />
       <ThemeSwitch />
     </LandingHeader>
   );

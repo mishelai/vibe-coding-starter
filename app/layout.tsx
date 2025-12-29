@@ -1,4 +1,4 @@
-import { Nunito_Sans } from 'next/font/google';
+import { Nunito_Sans, Heebo } from 'next/font/google';
 import { siteConfig } from '@/data/config/site.settings';
 import { ThemeProviders } from './theme-providers';
 import { Metadata } from 'next';
@@ -8,6 +8,7 @@ import { colors } from '@/data/config/colors.js';
 import '@/css/globals.css';
 import { SearchProvider } from '@/components/shared/SearchProvider';
 import { AnalyticsWrapper } from '@/components/shared/Analytics';
+import { LanguageProvider } from '@/lib/contexts/LanguageContext';
 
 const displayFont = Nunito_Sans({
   subsets: ['latin'],
@@ -19,6 +20,12 @@ const baseFont = Nunito_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-default',
+});
+
+const hebrewFont = Heebo({
+  subsets: ['hebrew'],
+  display: 'swap',
+  variable: '--font-hebrew',
 });
 
 const globalColors = colors;
@@ -79,7 +86,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${baseFont.variable} ${displayFont.variable} scroll-smooth`}
+      className={`${baseFont.variable} ${displayFont.variable} ${hebrewFont.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
@@ -131,15 +138,17 @@ export default function RootLayout({
 
       <body className="flex flex-col bg-white text-black antialiased dark:text-white aurora-burst min-h-screen">
         <ThemeProviders>
-          <AnalyticsWrapper />
+          <LanguageProvider>
+            <AnalyticsWrapper />
 
-          <div className="w-full flex flex-col justify-between items-center font-sans">
-            <SearchProvider>
-              <main className="w-full flex flex-col items-center mb-auto">
-                {children}
-              </main>
-            </SearchProvider>
-          </div>
+            <div className="w-full flex flex-col justify-between items-center font-sans">
+              <SearchProvider>
+                <main className="w-full flex flex-col items-center mb-auto">
+                  {children}
+                </main>
+              </SearchProvider>
+            </div>
+          </LanguageProvider>
         </ThemeProviders>
       </body>
     </html>

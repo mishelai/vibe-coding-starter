@@ -25,6 +25,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-space-default)', ...fontFamily.sans],
         display: ['var(--font-space-display)', ...fontFamily.sans],
+        hebrew: ['var(--font-hebrew)', ...fontFamily.sans],
         cursive: ['cursive'],
       },
       colors: {
@@ -142,10 +143,10 @@ module.exports = {
         'tall-2xl': { raw: '(min-height: 1536px)' },
       },
       boxShadow: {
-        'card': '0 12px 35px rgba(0,0,0,0.03)',
+        card: '0 12px 35px rgba(0,0,0,0.03)',
         'card-hover': '0 16px 45px rgba(0,0,0,0.06)',
-        'button': '0 12px 30px rgba(0,0,0,0.16)',
-        'elevated': '0 16px 40px rgba(0,0,0,0.07)',
+        button: '0 12px 30px rgba(0,0,0,0.16)',
+        elevated: '0 16px 40px rgba(0,0,0,0.07)',
       },
       zIndex: {
         60: 60,
