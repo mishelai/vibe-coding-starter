@@ -24,7 +24,9 @@ export interface TestimonialItem {
 export interface ServiceItem {
   id: string;
   title: string;
+  subtitle: string;
   description: string;
+  benefits: string[];
   imageSrc: string;
   ctaText: string;
   ctaHref: string;
@@ -86,8 +88,15 @@ export const serviceItems: ServiceItem[] = [
   {
     id: 'mentoring',
     title: 'Mentoring',
+    subtitle: 'Accelerate your growth with personalized guidance',
     description:
       'One-on-one personalized guidance designed to accelerate your growth as a leader. Whether you are navigating your first startup or scaling an established company, I provide the strategic support and accountability you need to succeed.',
+    benefits: [
+      '1-on-1 strategic consulting',
+      'Decision matrix development',
+      'Conflict resolution frameworks',
+      'Executive communication skills',
+    ],
     imageSrc: '/static/images/people/2.webp',
     ctaText: 'Start Mentoring',
     ctaHref: '/contact',
@@ -95,8 +104,15 @@ export const serviceItems: ServiceItem[] = [
   {
     id: 'strategy',
     title: 'Strategy & Product Development',
+    subtitle: 'Build products that customers love',
     description:
       'From market analysis to product roadmaps, I help you make informed decisions that drive real results. Together we will define your vision, validate your assumptions, and build products that customers love.',
+    benefits: [
+      'Market analysis & validation',
+      'Product roadmap planning',
+      'Go-to-market strategy',
+      'Competitive positioning',
+    ],
     imageSrc: '/static/images/people/3.webp',
     ctaText: 'Learn More',
     ctaHref: '/contact',
@@ -104,8 +120,15 @@ export const serviceItems: ServiceItem[] = [
   {
     id: 'community',
     title: 'Community',
+    subtitle: 'Connect with ambitious founders',
     description:
       'Join an exclusive network of ambitious founders and industry leaders. Our community offers peer support, collaborative learning, and connections that can transform your business trajectory.',
+    benefits: [
+      'Exclusive founder network',
+      'Peer learning sessions',
+      'Industry connections',
+      'Collaborative opportunities',
+    ],
     imageSrc: '/static/images/people/1.webp',
     ctaText: 'Join Community',
     ctaHref: '/contact',
@@ -113,8 +136,15 @@ export const serviceItems: ServiceItem[] = [
   {
     id: 'lectures',
     title: 'Lectures & Workshops',
+    subtitle: 'Actionable insights for teams',
     description:
       'Engaging presentations and hands-on workshops for teams and organizations. I deliver actionable insights on leadership, innovation, and building high-performance cultures.',
+    benefits: [
+      'Leadership development',
+      'Innovation workshops',
+      'Team building sessions',
+      'Culture optimization',
+    ],
     imageSrc: '/static/images/people/2.webp',
     ctaText: 'Book a Session',
     ctaHref: '/contact',

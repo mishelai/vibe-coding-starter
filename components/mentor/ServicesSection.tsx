@@ -6,11 +6,11 @@ export const ServicesSection = () => {
     <section className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-24 overflow-hidden">
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Heading */}
-        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-800 dark:text-neutral-50 mb-2 sm:mb-3">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary-800 dark:text-neutral-50 mb-3 sm:mb-4">
             {servicesContent.heading}
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-neutral-600 dark:text-secondary-200">
+          <p className="text-base sm:text-lg lg:text-xl text-neutral-600 dark:text-secondary-200 max-w-2xl mx-auto">
             {servicesContent.subheading}
           </p>
         </div>
@@ -21,7 +21,9 @@ export const ServicesSection = () => {
             <ServiceFeature
               key={service.id}
               title={service.title}
+              subtitle={service.subtitle}
               description={service.description}
+              benefits={service.benefits}
               imageSrc={service.imageSrc}
               imagePosition={index % 2 === 0 ? 'left' : 'right'}
               ctaText={service.ctaText}

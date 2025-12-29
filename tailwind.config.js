@@ -240,6 +240,14 @@ module.exports = {
             transform: 'translateX(-50%)',
           },
         },
+        shimmer: {
+          '0%': {
+            backgroundPosition: '-200% 0',
+          },
+          '100%': {
+            backgroundPosition: '200% 0',
+          },
+        },
       },
       animation: {
         tilt: 'tilt 10s linear infinite',
@@ -256,6 +264,7 @@ module.exports = {
         'fade-in-down-normal-delay':
           'fade-in-down 0.8s ease-in-out 2s forwards',
         marquee: '30s marquee linear infinite',
+        shimmer: 'shimmer 4s ease-in-out infinite',
       },
     },
   },

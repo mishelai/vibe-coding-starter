@@ -8,9 +8,26 @@ import { LogoMarquee } from './LogoMarquee';
 export const MentorHero = () => {
   return (
     <section className="w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20 overflow-hidden max-w-7xl mx-auto">
-      {/* Eyebrow */}
-      <span className="text-[10px] sm:text-xs uppercase tracking-widest text-neutral-400 dark:text-secondary-300 mb-3 sm:mb-4">
-        {heroContent.eyebrow}
+      {/* Eyebrow/Tagline with shimmer */}
+      <span className="text-[10px] sm:text-xs uppercase tracking-widest mb-3 sm:mb-4">
+        <span
+          className="inline-block bg-clip-text text-transparent bg-[length:200%_100%] animate-shimmer dark:hidden"
+          style={{
+            backgroundImage:
+              'linear-gradient(110deg, #9CA3AF 35%, #D1D5DB 45%, #E5E7EB 50%, #D1D5DB 55%, #9CA3AF 65%)',
+          }}
+        >
+          {heroContent.eyebrow}
+        </span>
+        <span
+          className="hidden dark:inline-block bg-clip-text text-transparent bg-[length:200%_100%] animate-shimmer"
+          style={{
+            backgroundImage:
+              'linear-gradient(110deg, #9CA3AF 35%, #D1D5DB 45%, #F3F4F6 50%, #D1D5DB 55%, #9CA3AF 65%)',
+          }}
+        >
+          {heroContent.eyebrow}
+        </span>
       </span>
 
       {/* Heading */}
