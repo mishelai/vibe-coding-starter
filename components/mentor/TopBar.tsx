@@ -38,6 +38,22 @@ export const TopBar = () => {
 
   useEffect(() => setMounted(true), []);
 
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (showLangMenu) {
+        setShowLangMenu(false);
+      }
+    };
+
+    if (showLangMenu) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showLangMenu]);
+
   return (
     <div className="w-full bg-secondary-800 dark:bg-secondary-900 text-primary-50 py-2.5 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm gap-2 sm:gap-4">
@@ -83,30 +99,37 @@ export const TopBar = () => {
           {mounted && (
             <div className="relative">
               <button
-                onClick={() => setShowLangMenu(!showLangMenu)}
-                className="hover:opacity-80 transition-opacity ml-1"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowLangMenu(!showLangMenu);
+                }}
+                className="hover:opacity-80 transition-opacity ml-1 flex items-center"
                 aria-label="Toggle language"
               >
                 <Languages className="w-4 h-4" strokeWidth={1.5} />
               </button>
 
               {showLangMenu && (
-                <div className="absolute right-0 top-full mt-2 bg-white dark:bg-secondary-800 rounded-md shadow-lg overflow-hidden z-50 min-w-[120px]">
+                <div
+                  className="absolute right-0 top-full mt-2 bg-white dark:bg-secondary-800 rounded-md shadow-lg overflow-hidden z-50 min-w-[120px]"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {Object.entries(languages).map(([code, lang]) => (
                     <button
                       key={code}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setLanguage(code as Language);
                         setShowLangMenu(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-100/20 dark:hover:bg-primary-900/20 transition-colors ${
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-100/20 dark:hover:bg-primary-900/20 transition-colors flex items-center justify-between ${
                         language === code
                           ? 'bg-primary-100/20 dark:bg-primary-900/20 text-primary-500'
                           : 'text-secondary-900 dark:text-neutral-50'
                       }`}
                     >
-                      {lang.name}
-                      {language === code && <span className="ml-2">✓</span>}
+                      <span>{lang.name}</span>
+                      {language === code && <span>✓</span>}
                     </button>
                   ))}
                 </div>

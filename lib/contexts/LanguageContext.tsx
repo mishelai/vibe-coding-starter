@@ -40,10 +40,16 @@ export const LanguageProvider = ({
   }, [language, mounted]);
 
   const setLanguage = (lang: Language) => {
+    console.log('Setting language to:', lang);
     setLanguageState(lang);
     localStorage.setItem('language', lang);
+    const newDir = lang === 'he' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.dir = newDir;
+    console.log('Updated HTML attributes:', {
+      lang: document.documentElement.lang,
+      dir: document.documentElement.dir,
+    });
   };
 
   const direction = language === 'he' ? 'rtl' : 'ltr';
