@@ -21,7 +21,7 @@ export default function Page() {
       </div>
 
       {/* Main content area with padding for the frame on larger screens */}
-      <main className="xl:pt-6 xl:pb-6 xl:px-6 w-full overflow-hidden">
+      <main className="xl:pt-6 xl:pb-6 xl:px-6 w-full">
         <div className="bg-primary-100 dark:bg-transparent min-h-screen w-full">
           <MentorHeader />
           <MentorHero />
