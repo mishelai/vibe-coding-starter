@@ -8,55 +8,61 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   direction: 'ltr' | 'rtl';
+  isReady: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
+// Helper to get initial language synchronously (for SSR matching)
+const getInitialLanguage = (): Language => {
+  if (typeof window === 'undefined') {
+    return 'he'; // Default to Hebrew for SSR
+  }
+  const saved = localStorage.getItem('language') as Language | null;
+  return saved === 'en' || saved === 'he' ? saved : 'he';
+};
+
 export const LanguageProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [language, setLanguageState] = useState<Language>('en');
-  const [mounted, setMounted] = useState(false);
+  const [language, setLanguageState] = useState<Language>('he');
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'he')) {
-      setLanguageState(savedLanguage);
-      document.documentElement.lang = savedLanguage;
-      document.documentElement.dir = savedLanguage === 'he' ? 'rtl' : 'ltr';
-    }
+    const initialLang = savedLanguage === 'en' || savedLanguage === 'he' ? savedLanguage : 'he';
+    setLanguageState(initialLang);
+    document.documentElement.lang = initialLang;
+    document.documentElement.dir = initialLang === 'he' ? 'rtl' : 'ltr';
+    setIsReady(true);
   }, []);
 
   useEffect(() => {
-    if (mounted) {
+    if (isReady) {
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
     }
-  }, [language, mounted]);
+  }, [language, isReady]);
 
   const setLanguage = (lang: Language) => {
-    console.log('Setting language to:', lang);
     setLanguageState(lang);
     localStorage.setItem('language', lang);
     const newDir = lang === 'he' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
     document.documentElement.dir = newDir;
-    console.log('Updated HTML attributes:', {
-      lang: document.documentElement.lang,
-      dir: document.documentElement.dir,
-    });
   };
 
   const direction = language === 'he' ? 'rtl' : 'ltr';
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, direction }}>
-      {children}
+    <LanguageContext.Provider value={{ language, setLanguage, direction, isReady }}>
+      <div style={{ visibility: isReady ? 'visible' : 'hidden' }}>
+        {children}
+      </div>
     </LanguageContext.Provider>
   );
 };

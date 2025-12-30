@@ -486,3 +486,21 @@ html.dark body.aurora-burst.bg-white {
 .marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-marquee-rtl {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
