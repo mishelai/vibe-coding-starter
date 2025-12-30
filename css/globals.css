@@ -466,3 +466,15 @@ html.dark body.aurora-burst.bg-white {
     ),
     #000000 !important;
 }
+
+/**
+ * Testimonial Marquee Animation
+ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

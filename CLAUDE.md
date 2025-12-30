@@ -59,7 +59,7 @@ When the user requests code examples, setup or configuration steps, or library/A
 
 ## Verifying features in the browser
 
-Use the Playwright MCP server to verify features in the browser.
+Use the chrom MCP server to verify features in the browser.
 Check for console errors and ensure the implemented functionality is working as expected.
 
 ## **EXTREMELY IMPORTANT:** Code Quality Checks

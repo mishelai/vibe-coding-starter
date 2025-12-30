@@ -47,33 +47,31 @@ export const TopBar = () => {
 
         {/* Right: Theme Toggle + Language Switcher */}
         <div className="flex items-center gap-3">
-          {/* Theme Toggle */}
-          {mounted && (
+          {/* Theme Toggle - Show Sun by default, actual theme icon after mount */}
+          <button
+            onClick={mounted ? updateTheme : undefined}
+            className="hover:opacity-80 transition-opacity"
+            aria-label="Toggle theme"
+          >
+            {mounted && currentTheme === 'dark' ? (
+              <Moon className="w-4 h-4" strokeWidth={1.5} />
+            ) : (
+              <Sun className="w-4 h-4" strokeWidth={1.5} />
+            )}
+          </button>
+
+          {/* Language Flag Toggle - Show US flag by default */}
+          <div className="relative group">
+            {/* Current Language Flag */}
             <button
-              onClick={updateTheme}
-              className="hover:opacity-80 transition-opacity"
-              aria-label="Toggle theme"
+              className="text-base hover:scale-110 transition-transform px-1 py-0.5"
+              aria-label="Change language"
             >
-              {currentTheme === 'dark' ? (
-                <Moon className="w-4 h-4" strokeWidth={1.5} />
-              ) : (
-                <Sun className="w-4 h-4" strokeWidth={1.5} />
-              )}
+              {mounted && language === 'he' ? '🇮🇱' : '🇺🇸'}
             </button>
-          )}
 
-          {/* Language Flag Toggle */}
-          {mounted && (
-            <div className="relative group">
-              {/* Current Language Flag */}
-              <button
-                className="text-base hover:scale-110 transition-transform px-1 py-0.5"
-                aria-label="Change language"
-              >
-                {language === 'he' ? '🇮🇱' : '🇺🇸'}
-              </button>
-
-              {/* Hover - Show Other Flag */}
+            {/* Hover - Show Other Flag */}
+            {mounted && (
               <div className="absolute right-0 top-full mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <button
                   onClick={() => setLanguage(language === 'he' ? 'en' : 'he')}
@@ -83,8 +81,8 @@ export const TopBar = () => {
                   {language === 'he' ? '🇺🇸' : '🇮🇱'}
                 </button>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

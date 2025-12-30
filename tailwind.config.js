@@ -312,7 +312,7 @@ module.exports = {
         'rotate-left-to-right': 'rotate-left-to-right 3s ease-in-out infinite',
         'fade-in-down-normal-delay':
           'fade-in-down 0.8s ease-in-out 2s forwards',
-        marquee: '30s marquee linear infinite',
+        marquee: '25s marquee linear infinite',
         'marquee-slow': '80s marquee-slow linear infinite',
         'marquee-infinite': '40s marquee-infinite linear infinite',
         'marquee-seamless': '40s marquee-seamless linear infinite',
