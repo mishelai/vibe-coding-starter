@@ -74,11 +74,11 @@ export const ContactSection = () => {
 
         {/* Two Column Layout */}
         <div className={cn(
-          'grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16',
-          isRTL && 'md:[&>div:first-child]:order-2'
+          'grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12',
+          isRTL && 'lg:[direction:rtl]'
         )}>
-          {/* Contact Form */}
-          <div className="bg-neutral-50 dark:bg-secondary-800 rounded-lg p-4 sm:p-6 lg:p-8">
+          {/* Contact Form - Takes 3 columns */}
+          <div className="lg:col-span-3 bg-neutral-50 dark:bg-secondary-800 rounded-2xl p-5 sm:p-6 lg:p-8">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label
@@ -176,60 +176,69 @@ export const ContactSection = () => {
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div className={cn(
-            'flex flex-col justify-center text-center',
-            isRTL ? 'md:text-right' : 'md:text-left'
-          )}>
-            <h3 className="text-lg sm:text-xl font-semibold text-secondary-800 dark:text-neutral-50 mb-4 sm:mb-6">
-              {labels.contactInfo}
-            </h3>
-
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              <a
-                href={`mailto:${contactContent.email}`}
-                className={cn(
-                  'flex items-center justify-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors',
-                  isRTL ? 'md:justify-end md:flex-row-reverse' : 'md:justify-start'
-                )}
-              >
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>{contactContent.email}</span>
-              </a>
-
-              <a
-                href={`tel:${contactContent.phone.replace(/\s/g, '')}`}
-                className={cn(
-                  'flex items-center justify-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors',
-                  isRTL ? 'md:justify-end md:flex-row-reverse' : 'md:justify-start'
-                )}
-              >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>{contactContent.phone}</span>
-              </a>
-            </div>
-
-            {/* Social Icons */}
-            <div>
-              <p className="text-xs sm:text-sm text-neutral-400 dark:text-secondary-300 mb-2 sm:mb-3">
-                {labels.followMe}
-              </p>
-              <div className={cn(
-                'flex gap-3 justify-center',
-                isRTL ? 'md:justify-end' : 'md:justify-start'
+          {/* Contact Info - Takes 2 columns */}
+          <div className="lg:col-span-2 flex flex-col justify-center" dir={isRTL ? 'rtl' : 'ltr'}>
+            <div className="bg-neutral-100/50 dark:bg-secondary-800/50 rounded-2xl p-5 sm:p-6 lg:p-8 border border-neutral-200 dark:border-secondary-700">
+              <h3 className={cn(
+                'text-lg sm:text-xl font-semibold text-secondary-800 dark:text-neutral-50 mb-5 sm:mb-6',
+                isRTL ? 'text-right' : 'text-left'
               )}>
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary-800 dark:bg-neutral-50 text-primary-50 dark:text-secondary-900 flex items-center justify-center hover:opacity-80 transition-opacity"
-                    aria-label={`Visit ${social.platform}`}
-                  >
-                    <SocialIcon platform={social.platform} />
-                  </a>
-                ))}
+                {labels.contactInfo}
+              </h3>
+
+              <div className="space-y-4 sm:space-y-5 mb-6 sm:mb-8">
+                <a
+                  href={`mailto:${contactContent.email}`}
+                  className={cn(
+                    'flex items-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors group',
+                    isRTL && 'flex-row-reverse'
+                  )}
+                >
+                  <span className="w-10 h-10 rounded-lg bg-secondary-800 dark:bg-neutral-50 text-neutral-50 dark:text-secondary-800 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </span>
+                  <span>{contactContent.email}</span>
+                </a>
+
+                <a
+                  href={`tel:${contactContent.phone.replace(/\s/g, '')}`}
+                  className={cn(
+                    'flex items-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors group',
+                    isRTL && 'flex-row-reverse'
+                  )}
+                >
+                  <span className="w-10 h-10 rounded-lg bg-secondary-800 dark:bg-neutral-50 text-neutral-50 dark:text-secondary-800 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </span>
+                  <span dir="ltr">{contactContent.phone}</span>
+                </a>
+              </div>
+
+              {/* Social Icons */}
+              <div className={cn(
+                'pt-5 sm:pt-6 border-t border-neutral-200 dark:border-secondary-700',
+                isRTL ? 'text-right' : 'text-left'
+              )}>
+                <p className="text-xs sm:text-sm text-neutral-500 dark:text-secondary-300 mb-3 sm:mb-4">
+                  {labels.followMe}
+                </p>
+                <div className={cn(
+                  'flex gap-3',
+                  isRTL ? 'justify-end' : 'justify-start'
+                )}>
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.platform}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-lg bg-secondary-800 dark:bg-neutral-50 text-neutral-50 dark:text-secondary-900 flex items-center justify-center hover:scale-105 transition-transform"
+                      aria-label={`Visit ${social.platform}`}
+                    >
+                      <SocialIcon platform={social.platform} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

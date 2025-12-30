@@ -8,7 +8,8 @@ export const siteInfoHe = {
 
 export const heroContentHe = {
   eyebrow: 'קבלו אתגר גדול עכשיו',
-  heading: 'התחילו מסע קריירה מצוין איתנו',
+  headingLine1: 'התחילו מסע קריירה',
+  headingLine2: 'מצוין איתנו',
   subheading:
     'שנו את הקריירה שלכם עם ליווי אישי והדרכה מקצועית ממומחי תעשייה מובילים.',
   primaryAction: 'הצטרפו עכשיו',

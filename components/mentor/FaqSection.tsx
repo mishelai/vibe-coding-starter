@@ -20,14 +20,12 @@ const FaqItem = ({ question, answer, isOpen, onToggle, isRTL }: FaqItemProps) =>
     <div className="border-b border-neutral-200 dark:border-neutral-700">
       <button
         onClick={onToggle}
-        className={cn(
-          'w-full flex items-center justify-between py-3 sm:py-4 hover:text-secondary-900 dark:hover:text-neutral-100 transition-colors',
-          isRTL ? 'text-right flex-row-reverse' : 'text-left'
-        )}
+        dir={isRTL ? 'rtl' : 'ltr'}
+        className="w-full flex items-center justify-between py-3 sm:py-4 hover:text-secondary-900 dark:hover:text-neutral-100 transition-colors text-start"
       >
         <span className={cn(
-          'text-sm sm:text-base lg:text-lg text-secondary-800 dark:text-neutral-50',
-          isRTL ? 'pl-4' : 'pr-4'
+          'text-sm sm:text-base lg:text-lg text-secondary-800 dark:text-neutral-50 flex-1',
+          isRTL ? 'pl-4 text-right' : 'pr-4 text-left'
         )}>
           {question}
         </span>
@@ -46,7 +44,7 @@ const FaqItem = ({ question, answer, isOpen, onToggle, isRTL }: FaqItemProps) =>
       >
         <p className={cn(
           'text-xs sm:text-sm lg:text-base text-neutral-600 dark:text-secondary-200 leading-relaxed',
-          isRTL && 'text-right'
+          isRTL ? 'text-right' : 'text-left'
         )}>
           {answer}
         </p>

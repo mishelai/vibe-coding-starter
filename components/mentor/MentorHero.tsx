@@ -34,7 +34,8 @@ export const MentorHero = () => {
 
       {/* Heading */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary-800 dark:text-neutral-50 text-center leading-tight tracking-tight w-full max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-4xl mb-3 sm:mb-4">
-        {heroContent.heading}
+        <span className="block">{heroContent.headingLine1}</span>
+        <span className="block">{heroContent.headingLine2}</span>
       </h1>
 
       {/* Subheading */}

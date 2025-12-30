@@ -46,7 +46,8 @@ export const siteInfo = {
 
 export const heroContent = {
   eyebrow: 'Get a big challenge now',
-  heading: 'START A EXCELLENT CAREER JOURNEY WITH US',
+  headingLine1: 'START AN EXCELLENT CAREER',
+  headingLine2: 'JOURNEY WITH US',
   subheading:
     'Transform your career with personalized mentorship and world-class guidance from industry experts.',
   primaryAction: 'Join Now',
