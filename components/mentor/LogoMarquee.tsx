@@ -1,7 +1,5 @@
 'use client';
 
-import { useContent } from '@/lib/hooks/useContent';
-
 const logos = [
   { name: 'Google', text: 'Google' },
   { name: 'Microsoft', text: 'Microsoft' },
@@ -14,10 +12,8 @@ const logos = [
 ];
 
 export const LogoMarquee = () => {
-  const { isRTL } = useContent();
-
   return (
-    <div className="w-full mt-10 sm:mt-12 lg:mt-14 relative">
+    <div className="w-full mt-10 sm:mt-12 lg:mt-14 relative" dir="ltr">
       {/* Outer wrapper to prevent layout overflow */}
       <div className="marquee-container relative overflow-hidden">
         {/* Gradient overlays */}
@@ -27,9 +23,7 @@ export const LogoMarquee = () => {
         {/* Marquee track - 2 sets, each wide enough to fill screen */}
         <div
           className="flex w-max"
-          style={{
-            animation: `${isRTL ? 'logo-marquee-rtl' : 'logo-marquee'} 25s linear infinite`,
-          }}
+          style={{ animation: 'logo-marquee 25s linear infinite' }}
         >
           {[1, 2].map((setNum) => (
             <div key={`set-${setNum}`} className="flex min-w-[100vw] justify-around">
