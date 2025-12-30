@@ -250,3 +250,9 @@ export const socialLinks: SocialLink[] = [
   { platform: 'linkedin', href: 'https://linkedin.com' },
   { platform: 'instagram', href: 'https://instagram.com' },
 ];
+
+export const legalLinks: NavLink[] = [
+  { label: 'Terms of Service', href: '#' },
+  { label: 'Privacy Policy', href: '#' },
+  { label: 'Cookie Policy', href: '#' },
+];

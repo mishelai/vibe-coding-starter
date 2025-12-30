@@ -29,6 +29,7 @@ export const useContent = () => {
     footerNavLinks: isHebrew
       ? heContent.footerNavLinksHe
       : enContent.footerNavLinks,
+    legalLinks: isHebrew ? heContent.legalLinksHe : enContent.legalLinks,
     socialLinks: enContent.socialLinks, // Same for both languages
     isRTL: isHebrew,
     language,

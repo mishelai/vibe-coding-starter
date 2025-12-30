@@ -206,3 +206,9 @@ export const footerNavLinksHe = [
   { label: 'צור קשר', href: '/contact' },
   { label: 'מדיניות פרטיות', href: '/privacy' },
 ];
+
+export const legalLinksHe = [
+  { label: 'תנאי שימוש', href: '#' },
+  { label: 'מדיניות פרטיות', href: '#' },
+  { label: 'מדיניות עוגיות', href: '#' },
+];
