@@ -478,3 +478,11 @@ html.dark body.aurora-burst.bg-white {
     transform: translateX(-50%);
   }
 }
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}

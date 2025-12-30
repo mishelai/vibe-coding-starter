@@ -34,18 +34,13 @@ export const TestimonialMarquee = () => {
 
   return (
     <div className="w-full relative" dir="ltr">
-      <div className="relative overflow-hidden py-4">
+      <div className="marquee-container relative overflow-hidden py-4">
         {/* Gradient overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 lg:w-32 bg-gradient-to-r from-primary-100 dark:from-[#0a0a0f] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 lg:w-32 bg-gradient-to-l from-primary-100 dark:from-[#0a0a0f] to-transparent z-10 pointer-events-none" />
 
-        {/* Marquee track with slower custom animation */}
-        <div
-          className="flex gap-4 w-max"
-          style={{
-            animation: 'marquee 60s linear infinite',
-          }}
-        >
+        {/* Marquee track with slower custom animation - pauses on hover */}
+        <div className="marquee-track flex gap-4 w-max">
           {/* First set of testimonials */}
           {testimonialItems.map((testimonial, index) => (
             <TestimonialCard
