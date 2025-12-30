@@ -21,6 +21,11 @@ export interface TestimonialItem {
   title: string;
 }
 
+export interface GridImage {
+  src: string;
+  alt: string;
+}
+
 export interface ServiceItem {
   id: string;
   title: string;
@@ -28,6 +33,7 @@ export interface ServiceItem {
   description: string;
   benefits: string[];
   imageSrc: string;
+  gridImages?: GridImage[];
   ctaText: string;
   ctaHref: string;
 }
@@ -48,7 +54,7 @@ export const heroContent = {
 
 export const aboutContent = {
   heading: 'About Motti Pinchas',
-  imageSrc: '/static/images/people/1.webp',
+  imageSrc: '/static/images/moti/Logos/moti_studio0.png',
   bio: [
     'With over two decades of experience building and scaling technology companies, I have dedicated my career to helping founders and entrepreneurs navigate the complex journey from idea to impact.',
     "As a former CTO and startup advisor, I have seen firsthand what separates successful ventures from those that struggle. My approach combines strategic thinking with practical, hands-on guidance tailored to each founder's unique situation.",
@@ -77,6 +83,34 @@ export const testimonialItems: TestimonialItem[] = [
     name: 'Maya Goldstein',
     title: 'CTO, ScaleUp',
   },
+  {
+    id: 'testimonial-4',
+    quote:
+      'The mentorship I received completely changed my approach to leadership. Motti helped me see blind spots I did not know existed.',
+    name: 'Amit Levy',
+    title: 'VP Engineering, DataFlow',
+  },
+  {
+    id: 'testimonial-5',
+    quote:
+      'From fundraising to team building, Motti provided invaluable insights at every turn. Our Series A success is largely thanks to his guidance.',
+    name: 'Rachel Stern',
+    title: 'Co-founder, CloudScale',
+  },
+  {
+    id: 'testimonial-6',
+    quote:
+      'Motti has a gift for simplifying complex challenges. His frameworks helped us navigate a critical pivot that saved our company.',
+    name: 'Jonathan Berg',
+    title: 'CEO, NexGen Solutions',
+  },
+  {
+    id: 'testimonial-7',
+    quote:
+      'The community Motti has built is incredible. The connections and peer learning have been as valuable as the mentorship itself.',
+    name: 'Talia Katz',
+    title: 'Founder, HealthTech Pro',
+  },
 ];
 
 export const servicesContent = {
@@ -97,7 +131,7 @@ export const serviceItems: ServiceItem[] = [
       'Conflict resolution frameworks',
       'Executive communication skills',
     ],
-    imageSrc: '/static/images/people/2.webp',
+    imageSrc: '/static/images/moti/Logos/moti_studio0.png',
     ctaText: 'Start Mentoring',
     ctaHref: '/contact',
   },
@@ -113,7 +147,7 @@ export const serviceItems: ServiceItem[] = [
       'Go-to-market strategy',
       'Competitive positioning',
     ],
-    imageSrc: '/static/images/people/3.webp',
+    imageSrc: '/static/images/moti/Logos/moti_studio2.png',
     ctaText: 'Learn More',
     ctaHref: '/contact',
   },
@@ -129,7 +163,12 @@ export const serviceItems: ServiceItem[] = [
       'Industry connections',
       'Collaborative opportunities',
     ],
-    imageSrc: '/static/images/people/1.webp',
+    imageSrc: '/static/images/moti/Logos/moti_studio.png',
+    gridImages: [
+      { src: '/static/images/moti/Logos/moti_studio0.png', alt: 'Founders meeting' },
+      { src: '/static/images/moti/Logos/moti_studio2.png', alt: 'Working session' },
+      { src: '/static/images/moti/Logos/moti_studio.png', alt: 'Community collaboration' },
+    ],
     ctaText: 'Join Community',
     ctaHref: '/contact',
   },
@@ -145,7 +184,7 @@ export const serviceItems: ServiceItem[] = [
       'Team building sessions',
       'Culture optimization',
     ],
-    imageSrc: '/static/images/people/2.webp',
+    imageSrc: '/static/images/moti/Logos/moti_lecture.png',
     ctaText: 'Book a Session',
     ctaHref: '/contact',
   },

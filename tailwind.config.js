@@ -241,6 +241,54 @@ module.exports = {
             transform: 'translateX(-50%)',
           },
         },
+        'marquee-slow': {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '100%': {
+            transform: 'translateX(-33.333%)',
+          },
+        },
+        'marquee-infinite': {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '100%': {
+            transform: 'translateX(-100%)',
+          },
+        },
+        'marquee-seamless': {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '100%': {
+            transform: 'translateX(calc(-50% - 0.5rem))',
+          },
+        },
+        'marquee-rtl': {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '100%': {
+            transform: 'translateX(50%)',
+          },
+        },
+        'marquee-offset': {
+          '0%': {
+            transform: 'translateX(-33.333%)',
+          },
+          '100%': {
+            transform: 'translateX(-66.666%)',
+          },
+        },
+        'marquee-rtl-offset': {
+          '0%': {
+            transform: 'translateX(-33.333%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+          },
+        },
         shimmer: {
           '0%': {
             backgroundPosition: '-200% 0',
@@ -265,6 +313,12 @@ module.exports = {
         'fade-in-down-normal-delay':
           'fade-in-down 0.8s ease-in-out 2s forwards',
         marquee: '30s marquee linear infinite',
+        'marquee-slow': '80s marquee-slow linear infinite',
+        'marquee-infinite': '40s marquee-infinite linear infinite',
+        'marquee-seamless': '40s marquee-seamless linear infinite',
+        'marquee-rtl': '30s marquee-rtl linear infinite',
+        'marquee-offset': '45s marquee-offset linear infinite',
+        'marquee-rtl-offset': '45s marquee-rtl-offset linear infinite',
         shimmer: 'shimmer 4s ease-in-out infinite',
       },
     },

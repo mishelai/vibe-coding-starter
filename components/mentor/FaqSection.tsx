@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
-import { faqContent, faqItems } from '@/data/config/landingPageData';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { useContent } from '@/lib/hooks/useContent';
 import { cn } from '@/lib/utils';
 
 interface FaqItemProps {
@@ -10,22 +10,31 @@ interface FaqItemProps {
   answer: string;
   isOpen: boolean;
   onToggle: () => void;
+  isRTL: boolean;
 }
 
-const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
+const FaqItem = ({ question, answer, isOpen, onToggle, isRTL }: FaqItemProps) => {
+  const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
+
   return (
     <div className="border-b border-neutral-200 dark:border-neutral-700">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-3 sm:py-4 text-left hover:text-secondary-900 dark:hover:text-neutral-100 transition-colors"
+        className={cn(
+          'w-full flex items-center justify-between py-3 sm:py-4 hover:text-secondary-900 dark:hover:text-neutral-100 transition-colors',
+          isRTL ? 'text-right flex-row-reverse' : 'text-left'
+        )}
       >
-        <span className="text-sm sm:text-base lg:text-lg text-secondary-800 dark:text-neutral-50 pr-4">
+        <span className={cn(
+          'text-sm sm:text-base lg:text-lg text-secondary-800 dark:text-neutral-50',
+          isRTL ? 'pl-4' : 'pr-4'
+        )}>
           {question}
         </span>
-        <ChevronRight
+        <ChevronIcon
           className={cn(
             'w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 dark:text-neutral-500 flex-shrink-0 transition-transform duration-200',
-            isOpen && 'rotate-90'
+            isOpen && (isRTL ? '-rotate-90' : 'rotate-90')
           )}
         />
       </button>
@@ -35,7 +44,10 @@ const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
           isOpen ? 'max-h-96 pb-3 sm:pb-4' : 'max-h-0'
         )}
       >
-        <p className="text-xs sm:text-sm lg:text-base text-neutral-600 dark:text-secondary-200 leading-relaxed">
+        <p className={cn(
+          'text-xs sm:text-sm lg:text-base text-neutral-600 dark:text-secondary-200 leading-relaxed',
+          isRTL && 'text-right'
+        )}>
           {answer}
         </p>
       </div>
@@ -45,6 +57,7 @@ const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
 
 export const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { faqContent, faqItems, isRTL } = useContent();
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -75,6 +88,7 @@ export const FaqSection = () => {
               answer={item.answer}
               isOpen={openIndex === index}
               onToggle={() => handleToggle(index)}
+              isRTL={isRTL}
             />
           ))}
         </div>

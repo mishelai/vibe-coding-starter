@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { heroContent } from '@/data/config/landingPageData';
+import { useContent } from '@/lib/hooks/useContent';
 import { MentorButton } from './MentorButton';
 import { LogoMarquee } from './LogoMarquee';
 
 export const MentorHero = () => {
+  const { heroContent } = useContent();
+
   return (
     <section className="w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20 overflow-hidden max-w-7xl mx-auto">
       {/* Eyebrow/Tagline with shimmer */}
@@ -45,12 +47,13 @@ export const MentorHero = () => {
 
       {/* Hero Image - Landscape 5:3 */}
       <div className="relative w-full max-w-[380px] sm:max-w-[600px] md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mt-6 sm:mt-8 lg:mt-12">
-        <div className="relative aspect-[5/3] rounded-2xl overflow-hidden grayscale shadow-elevated">
+        <div className="relative aspect-[5/3] rounded-2xl overflow-hidden shadow-elevated">
           <Image
-            src="/static/images/people/1.webp"
+            src="/static/images/moti/Logos/moti_lecture.png"
             alt="Motti Pinchas - Modern Mentor for Founders"
             fill
-            sizes="(max-width: 640px) 380px, (max-width: 768px) 600px, (max-width: 1024px) 768px, (max-width: 1280px) 1024px, 1152px"
+            sizes="(max-width: 640px) 760px, (max-width: 768px) 1200px, (max-width: 1024px) 1536px, 2304px"
+            quality={90}
             className="object-cover"
             priority
           />

@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { Facebook, Linkedin, Instagram, Mail, Phone } from 'lucide-react';
-import { contactContent, socialLinks } from '@/data/config/landingPageData';
+import { useContent } from '@/lib/hooks/useContent';
 import { MentorButton } from './MentorButton';
+import { cn } from '@/lib/utils';
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   switch (platform) {
@@ -18,8 +19,40 @@ const SocialIcon = ({ platform }: { platform: string }) => {
   }
 };
 
+// Form labels translations
+const formLabels = {
+  en: {
+    name: 'Name',
+    namePlaceholder: 'Your name',
+    email: 'Email',
+    emailPlaceholder: 'your@email.com',
+    message: 'Message',
+    messagePlaceholder: 'Tell me about your project...',
+    consentTitle: 'Receive actionable insights',
+    consentDesc: 'Strategic guidance and resources for founders. Your email stays private.',
+    submit: 'Send Message',
+    contactInfo: 'Contact Information',
+    followMe: 'Follow me',
+  },
+  he: {
+    name: 'שם',
+    namePlaceholder: 'השם שלך',
+    email: 'אימייל',
+    emailPlaceholder: 'your@email.com',
+    message: 'הודעה',
+    messagePlaceholder: 'ספר לי על הפרויקט שלך...',
+    consentTitle: 'קבל תובנות מעשיות',
+    consentDesc: 'הדרכה אסטרטגית ומשאבים למייסדים. האימייל שלך נשאר פרטי.',
+    submit: 'שלח הודעה',
+    contactInfo: 'פרטי התקשרות',
+    followMe: 'עקבו אחריי',
+  },
+};
+
 export const ContactSection = () => {
   const [emailConsent, setEmailConsent] = useState(false);
+  const { contactContent, socialLinks, isRTL, language } = useContent();
+  const labels = formLabels[language];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,63 +73,81 @@ export const ContactSection = () => {
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
+        <div className={cn(
+          'grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16',
+          isRTL && 'md:[&>div:first-child]:order-2'
+        )}>
           {/* Contact Form */}
           <div className="bg-neutral-50 dark:bg-secondary-800 rounded-lg p-4 sm:p-6 lg:p-8">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2"
+                  className={cn(
+                    'block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2',
+                    isRTL && 'text-right'
+                  )}
                 >
-                  Name
+                  {labels.name}
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
+                  dir={isRTL ? 'rtl' : 'ltr'}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-neutral-200 dark:border-secondary-700 bg-white dark:bg-secondary-900 text-secondary-800 dark:text-neutral-50 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-neutral-50 transition-all text-sm sm:text-base"
-                  placeholder="Your name"
+                  placeholder={labels.namePlaceholder}
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2"
+                  className={cn(
+                    'block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2',
+                    isRTL && 'text-right'
+                  )}
                 >
-                  Email
+                  {labels.email}
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
+                  dir="ltr"
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-neutral-200 dark:border-secondary-700 bg-white dark:bg-secondary-900 text-secondary-800 dark:text-neutral-50 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-neutral-50 transition-all text-sm sm:text-base"
-                  placeholder="your@email.com"
+                  placeholder={labels.emailPlaceholder}
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2"
+                  className={cn(
+                    'block text-sm font-medium text-secondary-800 dark:text-neutral-50 mb-1.5 sm:mb-2',
+                    isRTL && 'text-right'
+                  )}
                 >
-                  Message
+                  {labels.message}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={4}
                   required
+                  dir={isRTL ? 'rtl' : 'ltr'}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-neutral-200 dark:border-secondary-700 bg-white dark:bg-secondary-900 text-secondary-800 dark:text-neutral-50 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-neutral-50 transition-all resize-none text-sm sm:text-base"
-                  placeholder="Tell me about your project..."
+                  placeholder={labels.messagePlaceholder}
                 />
               </div>
 
               {/* Email Consent Checkbox */}
-              <div className="flex items-start gap-3 pt-2">
+              <div className={cn(
+                'flex items-start gap-3 pt-2',
+                isRTL && 'flex-row-reverse'
+              )}>
                 <input
                   type="checkbox"
                   id="emailConsent"
@@ -107,31 +158,40 @@ export const ContactSection = () => {
                 />
                 <label
                   htmlFor="emailConsent"
-                  className="flex-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed cursor-pointer"
+                  className={cn(
+                    'flex-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed cursor-pointer',
+                    isRTL && 'text-right'
+                  )}
                 >
                   <span className="font-medium text-secondary-800 dark:text-neutral-50">
-                    Receive actionable insights
+                    {labels.consentTitle}
                   </span>
                   <span className="block mt-0.5 text-neutral-500 dark:text-neutral-400">
-                    Strategic guidance and resources for founders. Your email stays private.
+                    {labels.consentDesc}
                   </span>
                 </label>
               </div>
 
-              <MentorButton className="w-full">Send Message</MentorButton>
+              <MentorButton className="w-full">{labels.submit}</MentorButton>
             </form>
           </div>
 
           {/* Contact Info */}
-          <div className="flex flex-col justify-center text-center md:text-left">
+          <div className={cn(
+            'flex flex-col justify-center text-center',
+            isRTL ? 'md:text-right' : 'md:text-left'
+          )}>
             <h3 className="text-lg sm:text-xl font-semibold text-secondary-800 dark:text-neutral-50 mb-4 sm:mb-6">
-              Contact Information
+              {labels.contactInfo}
             </h3>
 
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               <a
                 href={`mailto:${contactContent.email}`}
-                className="flex items-center justify-center md:justify-start gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors"
+                className={cn(
+                  'flex items-center justify-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors',
+                  isRTL ? 'md:justify-end md:flex-row-reverse' : 'md:justify-start'
+                )}
               >
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>{contactContent.email}</span>
@@ -139,7 +199,10 @@ export const ContactSection = () => {
 
               <a
                 href={`tel:${contactContent.phone.replace(/\s/g, '')}`}
-                className="flex items-center justify-center md:justify-start gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors"
+                className={cn(
+                  'flex items-center justify-center gap-3 text-sm sm:text-base text-neutral-600 dark:text-secondary-200 hover:text-secondary-800 dark:hover:text-neutral-50 transition-colors',
+                  isRTL ? 'md:justify-end md:flex-row-reverse' : 'md:justify-start'
+                )}
               >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>{contactContent.phone}</span>
@@ -149,9 +212,12 @@ export const ContactSection = () => {
             {/* Social Icons */}
             <div>
               <p className="text-xs sm:text-sm text-neutral-400 dark:text-secondary-300 mb-2 sm:mb-3">
-                Follow me
+                {labels.followMe}
               </p>
-              <div className="flex gap-3 justify-center md:justify-start">
+              <div className={cn(
+                'flex gap-3 justify-center',
+                isRTL ? 'md:justify-end' : 'md:justify-start'
+              )}>
                 {socialLinks.map((social) => (
                   <a
                     key={social.platform}

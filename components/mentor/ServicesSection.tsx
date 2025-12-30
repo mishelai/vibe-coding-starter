@@ -1,7 +1,11 @@
-import { servicesContent, serviceItems } from '@/data/config/landingPageData';
+'use client';
+
+import { useContent } from '@/lib/hooks/useContent';
 import { ServiceFeature } from './ServiceFeature';
 
 export const ServicesSection = () => {
+  const { servicesContent, serviceItems, isRTL } = useContent();
+
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-24 overflow-hidden">
       <div className="w-full max-w-7xl mx-auto">
@@ -20,14 +24,17 @@ export const ServicesSection = () => {
           {serviceItems.map((service, index) => (
             <ServiceFeature
               key={service.id}
+              id={service.id}
               title={service.title}
               subtitle={service.subtitle}
               description={service.description}
               benefits={service.benefits}
               imageSrc={service.imageSrc}
+              gridImages={service.gridImages}
               imagePosition={index % 2 === 0 ? 'left' : 'right'}
               ctaText={service.ctaText}
               ctaHref={service.ctaHref}
+              isRTL={isRTL}
             />
           ))}
         </div>

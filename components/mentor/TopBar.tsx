@@ -1,19 +1,9 @@
 'use client';
 
-import {
-  Facebook,
-  Linkedin,
-  Instagram,
-  Mail,
-  ArrowRight,
-  Moon,
-  Sun,
-  Languages,
-} from 'lucide-react';
-import { contactContent, socialLinks } from '@/data/config/landingPageData';
+import { Facebook, Linkedin, Instagram, Moon, Sun } from 'lucide-react';
+import { socialLinks } from '@/data/config/landingPageData';
 import { useThemeSwitch } from '@/components/shared/useThemeSwitch';
-import { useLanguage, Language } from '@/lib/contexts/LanguageContext';
-import { siteConfig } from '@/data/config/site.settings';
+import { useLanguage } from '@/lib/contexts/LanguageContext';
 import { useEffect, useState } from 'react';
 
 const SocialIcon = ({ platform }: { platform: string }) => {
@@ -31,57 +21,16 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 
 export const TopBar = () => {
   const [mounted, setMounted] = useState(false);
-  const [showLangMenu, setShowLangMenu] = useState(false);
   const { currentTheme, updateTheme } = useThemeSwitch();
   const { language, setLanguage } = useLanguage();
-  const languages = siteConfig.languages;
 
   useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    const handleClickOutside = () => {
-      if (showLangMenu) {
-        setShowLangMenu(false);
-      }
-    };
-
-    if (showLangMenu) {
-      document.addEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [showLangMenu]);
-
   return (
-    <div className="w-full bg-secondary-800 dark:bg-secondary-900 text-primary-50 py-2.5 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm gap-2 sm:gap-4">
-        {/* Left: Email */}
-        <a
-          href={`mailto:${contactContent.email}`}
-          className="flex items-center gap-1.5 sm:gap-2 hover:opacity-80 transition-opacity flex-shrink-0"
-        >
-          <Mail className="w-4 h-4 flex-shrink-0" strokeWidth={1.5} />
-          <span className="hidden sm:inline truncate">
-            {contactContent.email}
-          </span>
-        </a>
-
-        {/* Center: Promo Text */}
-        <a
-          href="#contact"
-          className="hidden lg:flex items-center gap-2 hover:opacity-80 transition-opacity group flex-shrink min-w-0"
-        >
-          <span className="truncate">Start your transformation today.</span>
-          <span className="font-semibold flex items-center gap-1 whitespace-nowrap">
-            Get started now
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
-          </span>
-        </a>
-
-        {/* Right: Social Links + Theme Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+    <div dir="ltr" className="w-full bg-secondary-800 dark:bg-secondary-900 text-primary-50 py-2.5 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
+        {/* Left: Social Links */}
+        <div className="flex items-center gap-3">
           {socialLinks.map((social) => (
             <a
               key={social.platform}
@@ -94,54 +43,15 @@ export const TopBar = () => {
               <SocialIcon platform={social.platform} />
             </a>
           ))}
+        </div>
 
-          {/* Language Toggle - Elegant & Small */}
-          {mounted && (
-            <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowLangMenu(!showLangMenu);
-                }}
-                className="hover:opacity-80 transition-opacity ml-1 flex items-center"
-                aria-label="Toggle language"
-              >
-                <Languages className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-
-              {showLangMenu && (
-                <div
-                  className="absolute right-0 top-full mt-2 bg-white dark:bg-secondary-800 rounded-md shadow-lg overflow-hidden z-50 min-w-[120px]"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {Object.entries(languages).map(([code, lang]) => (
-                    <button
-                      key={code}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setLanguage(code as Language);
-                        setShowLangMenu(false);
-                      }}
-                      className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-100/20 dark:hover:bg-primary-900/20 transition-colors flex items-center justify-between ${
-                        language === code
-                          ? 'bg-primary-100/20 dark:bg-primary-900/20 text-primary-500'
-                          : 'text-secondary-900 dark:text-neutral-50'
-                      }`}
-                    >
-                      <span>{lang.name}</span>
-                      {language === code && <span>✓</span>}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Theme Toggle - Elegant & Small */}
+        {/* Right: Theme Toggle + Language Switcher */}
+        <div className="flex items-center gap-3">
+          {/* Theme Toggle */}
           {mounted && (
             <button
               onClick={updateTheme}
-              className="hover:opacity-80 transition-opacity ml-1"
+              className="hover:opacity-80 transition-opacity"
               aria-label="Toggle theme"
             >
               {currentTheme === 'dark' ? (
@@ -150,6 +60,30 @@ export const TopBar = () => {
                 <Sun className="w-4 h-4" strokeWidth={1.5} />
               )}
             </button>
+          )}
+
+          {/* Language Flag Toggle */}
+          {mounted && (
+            <div className="relative group">
+              {/* Current Language Flag */}
+              <button
+                className="text-base hover:scale-110 transition-transform px-1 py-0.5"
+                aria-label="Change language"
+              >
+                {language === 'he' ? '🇮🇱' : '🇺🇸'}
+              </button>
+
+              {/* Hover - Show Other Flag */}
+              <div className="absolute right-0 top-full mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <button
+                  onClick={() => setLanguage(language === 'he' ? 'en' : 'he')}
+                  className="text-base bg-secondary-700 dark:bg-secondary-800 hover:bg-secondary-600 dark:hover:bg-secondary-700 px-2 py-1 rounded shadow-lg transition-all hover:scale-110"
+                  aria-label={language === 'he' ? 'Switch to English' : 'Switch to Hebrew'}
+                >
+                  {language === 'he' ? '🇺🇸' : '🇮🇱'}
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
